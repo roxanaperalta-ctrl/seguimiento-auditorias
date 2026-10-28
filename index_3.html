@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Seguimiento Auditorías Cartera</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Página de entrada pública: no contiene datos. El tablero real vive en tu cuenta de Google (Apps Script, acceso "Solo yo"). */
+:root{--bg:#f4f6f8;--card:#fff;--ink:#18212b;--muted:#5b6876;--line:#dde3ea;--accent:#1d5d8f;--accent-ink:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#11161c;--card:#19212a;--ink:#e6ebf1;--muted:#9aa7b5;--line:#2a3440;--accent:#7fb4e0;--accent-ink:#11161c;color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 "IBM Plex Sans",system-ui,"Segoe UI",Arial,sans-serif;display:flex;flex-direction:column}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);background:var(--card)}
+h1{font-size:18px;margin:0}
+.sub{color:var(--muted);font-size:12.5px}
+a.btn{display:inline-block;padding:8px 14px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none}
+a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+main{flex:1;display:flex;min-height:0}
+iframe{flex:1;border:0;width:100%;min-height:80vh;background:var(--bg)}
+.aviso{max-width:640px;margin:40px auto;padding:0 16px}
+.aviso code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Seguimiento de auditorías de cartera</h1>
+    <div class="sub">Se abre con tu cuenta de Google. Si el tablero no aparece abajo, usa el botón.</div>
+  </div>
+  <a class="btn" id="abrir" href="#" target="_blank" rel="noopener">Abrir tablero</a>
+</header>
+<main id="main"></main>
+<script>
+// Pega aquí la URL /exec de tu aplicación web de Apps Script (Implementar → Aplicación web).
+const URL_TABLERO = 'https://script.google.com/macros/s/AKfycbxoTSMCSAqY8Vv28ZZn3F6hpqAYg2D4LHXAor-RCLROZeYZnTOljON9blGreAFZZK1fug/exec';
+
+const main = document.getElementById('main'), abrir = document.getElementById('abrir');
+if (!/^https:\/\/script\.google\.com\/(a\/macros\/[^/]+|macros)\/s\/[\w-]+\/exec$/.test(URL_TABLERO)) {
+  abrir.hidden = true;
+  main.innerHTML = '<div class="aviso"><p>Falta configurar el enlace del tablero.</p><p>Edita <code>index.html</code> en GitHub y reemplaza <code>PEGA_AQUI_LA_URL_DE_APPS_SCRIPT</code> por la URL <code>/exec</code> de tu aplicación web de Apps Script.</p></div>';
+} else {
+  // Se abre el tablero directamente (no incrustado): así Google reconoce tu sesión y puedes editar.
+  abrir.href = URL_TABLERO; abrir.removeAttribute('target');
+  main.innerHTML = '<div class="aviso"><p>Abriendo el tablero…</p><p>Si no se abre solo, pulsa <b>Abrir tablero</b>.</p></div>';
+  location.replace(URL_TABLERO);
+}
+</script>
+</body>
+</html>
