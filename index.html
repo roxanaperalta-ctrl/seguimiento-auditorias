@@ -42,10 +42,10 @@ if (!/^https:\/\/script\.google\.com\/(a\/macros\/[^/]+|macros)\/s\/[\w-]+\/exec
   abrir.hidden = true;
   main.innerHTML = '<div class="aviso"><p>Falta configurar el enlace del tablero.</p><p>Edita <code>index.html</code> en GitHub y reemplaza <code>PEGA_AQUI_LA_URL_DE_APPS_SCRIPT</code> por la URL <code>/exec</code> de tu aplicación web de Apps Script.</p></div>';
 } else {
-  abrir.href = URL_TABLERO;
-  const f = document.createElement('iframe');
-  f.src = URL_TABLERO; f.title = 'Tablero de seguimiento';
-  main.appendChild(f);
+  // Se abre el tablero directamente (no incrustado): así Google reconoce tu sesión y puedes editar.
+  abrir.href = URL_TABLERO; abrir.removeAttribute('target');
+  main.innerHTML = '<div class="aviso"><p>Abriendo el tablero…</p><p>Si no se abre solo, pulsa <b>Abrir tablero</b>.</p></div>';
+  location.replace(URL_TABLERO);
 }
 </script>
 </body>
