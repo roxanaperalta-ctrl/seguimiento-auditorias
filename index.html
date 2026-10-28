@@ -35,10 +35,10 @@ iframe{flex:1;border:0;width:100%;min-height:80vh;background:var(--bg)}
 <main id="main"></main>
 <script>
 // Pega aquí la URL /exec de tu aplicación web de Apps Script (Implementar → Aplicación web).
-const URL_TABLERO = 'PEGA_AQUI_LA_URL_DE_APPS_SCRIPT';
+const URL_TABLERO = 'https://script.google.com/a/macros/dtgrupo.com/s/AKfycbySAgD5Y4vqBB_gf9NXzVA7Nn5xSFYFAQyYyUoKvO-BxZ1Hr4b-HEOEfaFjEiXHBqecIQ/exec';
 
 const main = document.getElementById('main'), abrir = document.getElementById('abrir');
-if (!/^https:\/\/script\.google\.com\/(a\/[^/]+\/)?macros\/s\/[\w-]+\/exec$/.test(URL_TABLERO)) {
+if (!/^https:\/\/script\.google\.com\/(a\/macros\/[^/]+|macros)\/s\/[\w-]+\/exec$/.test(URL_TABLERO)) {
   abrir.hidden = true;
   main.innerHTML = '<div class="aviso"><p>Falta configurar el enlace del tablero.</p><p>Edita <code>index.html</code> en GitHub y reemplaza <code>PEGA_AQUI_LA_URL_DE_APPS_SCRIPT</code> por la URL <code>/exec</code> de tu aplicación web de Apps Script.</p></div>';
 } else {
